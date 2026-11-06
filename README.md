@@ -19,6 +19,7 @@ Download the JAR build corresponding to your server's Java runtime:
 
 ## ⚡ Core Features
 
+* **🕒 Multi-Timezone System (Primary: IST)**: Full timezone selector in GUI supporting **IST (India Standard Time, UTC+05:30)**, UTC, EST, CST, PST, GMT, CET, JST, and AEST. All ban screens and audit timelines display exact timestamps with timezone offsets.
 * **Zero Movement Checks**: Pure client-environment verification eliminates 100% of lag-induced movement false kicks.
 * **Launcher & Brand Detection**: Inspects `minecraft:brand` to reveal Vanilla, Fabric, Forge, NeoForge, Feather, Lunar, Badlion, or cheat clients (Meteor, Aristois, LiquidBounce, etc.).
 * **Handshake Mod List Extraction**: Decodes Forge & NeoForge `fml:handshake` / `forge:handshake` packets to uncover every active client mod ID and version.

@@ -14,6 +14,19 @@ settings:
   # MONITOR   -> Logs and alerts staff only, does not kick or ban players
   mode: "BLACKLIST"
 
+  # Primary Server Timezone for bans, infractions, and system logs.
+  # Options:
+  #   - "IST"  (Asia/Kolkata, UTC+05:30) - Primary
+  #   - "UTC"  (Coordinated Universal Time, UTC+00:00)
+  #   - "EST"  (America/New_York, UTC-05:00)
+  #   - "CST"  (America/Chicago, UTC-06:00)
+  #   - "PST"  (America/Los_Angeles, UTC-08:00)
+  #   - "GMT"  (Europe/London, UTC+00:00)
+  #   - "CET"  (Europe/Berlin, UTC+01:00)
+  #   - "JST"  (Asia/Tokyo, UTC+09:00)
+  #   - "AEST" (Australia/Sydney, UTC+10:00)
+  timezone: "IST"
+
   # Default Action when a violation is detected:
   # KICK        -> Disconnects player with the custom message below
   # BAN         -> Permanently bans the player from the server
@@ -30,35 +43,29 @@ settings:
 # Players or IDs listed here will NOT be tracked, scanned, or logged.
 # ================================================================
 bypass:
-  # Add exact player usernames or UUIDs to completely bypass GhostTrace
   exempt-players:
     - "YourAdminNameHere"
     - "00000000-0000-0000-0000-000000000000"
 
-  # Add IP addresses to completely bypass GhostTrace
   exempt-ips:
     - "127.0.0.1"
 
 # ================================================================
 #         MOD VERSION ENFORCEMENT & REMOTE DISABLER
-# This allows server owners to force-disable specific mods or
-# require players to update outdated mod versions before joining!
-#
-# Rules format:
-#   "<mod_id>:DISABLED" -> Completely blocks/disables this mod.
-#   "<mod_id>:<minimum_version>" -> Requires player to update to this version.
+# Force-disable specific mods or mandate minimum required versions.
+# Rules format: "<mod_id>:DISABLED" or "<mod_id>:<minimum_version>"
 # ================================================================
 version-control:
   enabled: true
 
-  # Kick message when a player joins with an outdated or disabled mod version
+  # Kick screen message prompting player to update
   update-required-message: |-
     &c&l[GhostTrace Mod Version Notice]
     
     &7Your version of &e%mod% &7(&c%current_version%&7) is outdated or disabled.
     &aPlease update to &b%required_version% &aor newer to connect to this server.
+    &8Logged at: &7%timestamp_detailed%
 
-  # List of enforced or disabled mods
   enforced-mods:
     - "simple-voice-chat:2.5.0"
     - "sodium:0.5.8"
@@ -72,19 +79,16 @@ version-control:
 # and restarts the server!
 # ================================================================
 ip-ban-on-attempts:
-  # Must be set to true by admin to activate
   enabled: false
-  
-  # Threshold of failed/illegal join attempts before triggering an IP ban
   max-attempts: 20
 
-  # IP ban notification reason
   ban-ip-reason: |-
     &c&l[GhostTrace Security System]
     
     &cYour IP has been permanently banned from this network.
     &7Reason: Exceeded %max_attempts% connection attempts with prohibited mods/clients.
     &7Offending Client: &e%illegal_item% &7(%category%)
+    &7Incident Time: &f%timestamp_detailed%
 
 # ================================================================
 #                  HISTORICAL SESSION LOGGING
@@ -105,15 +109,17 @@ messages:
     &e%illegal_item% &8(&7Type: &f%category%&8)
     
     &cRemove this mod, only then you will be able to join the server.
+    &8Logged at: &7%timestamp_detailed%
   
   ban-reason: |-
     &c&l[GhostTrace Security]
     
     &cYou have been permanently banned for joining with prohibited client software:
     &e%illegal_item% &8(&7Type: &f%category%&8)
+    &8Logged at: &7%timestamp_detailed%
   
-  admin-alert: "&8[&bGhost&3Trace&8] &cAlert: &e%player% &7attempted to join with illegal %category%: &c%illegal_item% &7(Launcher/Brand: &b%brand%&7)"
-  ip-ban-alert: "&8[&bGhost&3Trace&8] &4&lIP-BAN: &e%player% &7(IP: &f%ip%&7) has been automatically IP-banned after exceeding %attempts% illegal join attempts!"
+  admin-alert: "&8[&bGhost&3Trace&8] &cAlert: &e%player% &7attempted to join with illegal %category%: &c%illegal_item% &7(Client: &b%brand%&7) &8[%timestamp%]"
+  ip-ban-alert: "&8[&bGhost&3Trace&8] &4&lIP-BAN: &e%player% &7(IP: &f%ip%&7) automatically IP-banned after exceeding %attempts% attempts! &8[%timestamp%]"
   no-permission: "&cYou do not have permission to execute this command."
   reload-success: "&aGhostTrace configuration reloaded successfully!"
 
@@ -175,7 +181,6 @@ blacklist:
 
 # ================================================================
 #                      WHITELIST CONFIGURATION
-# (Used when mode is set to "WHITELIST")
 # ================================================================
 whitelist:
   allowed-brands:
