@@ -1,0 +1,223 @@
+# ================================================================
+#                       GhostTrace Configuration
+#         Server-Side Client Mod & Payload Inspector Anti-Cheat
+# ================================================================
+
+# General Settings
+settings:
+  # Prefix for chat and broadcast messages
+  prefix: "&8[&bGhost&3Trace&8]&r "
+  
+  # Enforcement Mode:
+  # BLACKLIST -> Blocks only items listed in prohibited sections
+  # WHITELIST -> Blocks ANY mod or brand NOT explicitly in allowed sections
+  # MONITOR   -> Logs and alerts staff only, does not kick or ban players
+  mode: "BLACKLIST"
+
+  # Default Action when a violation is detected:
+  # KICK        -> Disconnects player with the custom message below
+  # BAN         -> Permanently bans the player from the server
+  # NOTIFY_ONLY -> Broadcasts an alert to online admins
+  # LOG_ONLY    -> Only saves the violation to history.yml
+  action: "KICK"
+
+  # Delay (in server ticks) before executing punishment on join.
+  # Gives handshake packets 1-2 ticks to fully register.
+  scan-delay-ticks: 2
+
+# ================================================================
+#                       BYPASS CONFIGURATION
+# Players or IDs listed here will NOT be tracked, scanned, or logged.
+# ================================================================
+bypass:
+  # Add exact player usernames or UUIDs to completely bypass GhostTrace
+  exempt-players:
+    - "YourAdminNameHere"
+    - "00000000-0000-0000-0000-000000000000"
+
+  # Add IP addresses to completely bypass GhostTrace
+  exempt-ips:
+    - "127.0.0.1"
+
+# ================================================================
+#         MOD VERSION ENFORCEMENT & REMOTE DISABLER
+# This allows server owners to force-disable specific mods or
+# require players to update outdated mod versions before joining!
+#
+# Rules format:
+#   "<mod_id>:DISABLED" -> Completely blocks/disables this mod.
+#   "<mod_id>:<minimum_version>" -> Requires player to update to this version.
+# ================================================================
+version-control:
+  enabled: true
+
+  # Kick message when a player joins with an outdated or disabled mod version
+  update-required-message: |-
+    &c&l[GhostTrace Mod Version Notice]
+    
+    &7Your version of &e%mod% &7(&c%current_version%&7) is outdated or disabled.
+    &aPlease update to &b%required_version% &aor newer to connect to this server.
+
+  # List of enforced or disabled mods
+  enforced-mods:
+    - "simple-voice-chat:2.5.0"
+    - "sodium:0.5.8"
+    - "iris:1.7.0"
+    - "outdated_client_mod:DISABLED"
+
+# ================================================================
+#                 REPEATED ATTEMPTS IP-BAN CONDITION
+# Note: By default, this is SET TO FALSE (disabled). It will NOT work
+# until the admin directly edits this to 'true' in this config file
+# and restarts the server!
+# ================================================================
+ip-ban-on-attempts:
+  # Must be set to true by admin to activate
+  enabled: false
+  
+  # Threshold of failed/illegal join attempts before triggering an IP ban
+  max-attempts: 20
+
+  # IP ban notification reason
+  ban-ip-reason: |-
+    &c&l[GhostTrace Security System]
+    
+    &cYour IP has been permanently banned from this network.
+    &7Reason: Exceeded %max_attempts% connection attempts with prohibited mods/clients.
+    &7Offending Client: &e%illegal_item% &7(%category%)
+
+# ================================================================
+#                  HISTORICAL SESSION LOGGING
+# Saves exact timestamps, loaded mods, client brands, and IP
+# addresses for every player session (browsable in /gt gui).
+# ================================================================
+session-logging:
+  enabled: true
+  max-sessions-per-player: 50
+  log-clean-sessions: true
+
+# Customizable Messages
+messages:
+  kick-reason: |-
+    &c&l[GhostTrace Security]
+    
+    &7An illegal mod, client, or channel was detected on your client:
+    &e%illegal_item% &8(&7Type: &f%category%&8)
+    
+    &cRemove this mod, only then you will be able to join the server.
+  
+  ban-reason: |-
+    &c&l[GhostTrace Security]
+    
+    &cYou have been permanently banned for joining with prohibited client software:
+    &e%illegal_item% &8(&7Type: &f%category%&8)
+  
+  admin-alert: "&8[&bGhost&3Trace&8] &cAlert: &e%player% &7attempted to join with illegal %category%: &c%illegal_item% &7(Launcher/Brand: &b%brand%&7)"
+  ip-ban-alert: "&8[&bGhost&3Trace&8] &4&lIP-BAN: &e%player% &7(IP: &f%ip%&7) has been automatically IP-banned after exceeding %attempts% illegal join attempts!"
+  no-permission: "&cYou do not have permission to execute this command."
+  reload-success: "&aGhostTrace configuration reloaded successfully!"
+
+# ================================================================
+#                      BLACKLIST CONFIGURATION
+# ================================================================
+blacklist:
+  prohibited-brands:
+    - "meteor"
+    - "wurst"
+    - "aristois"
+    - "liquidbounce"
+    - "bleachhack"
+    - "future"
+    - "rusherhack"
+    - "konas"
+    - "inertia"
+    - "sigma"
+    - "impact"
+    - "cheatbreaker"
+    - "ares"
+
+  prohibited-mods:
+    - "baritone"
+    - "baritone-api"
+    - "freecam"
+    - "xray"
+    - "advanced_xray"
+    - "xraymod"
+    - "seedcracker"
+    - "seedcrackerx"
+    - "cheststealer"
+    - "torohealth"
+    - "damageindicators"
+    - "autoclicker"
+    - "packetlogger"
+    - "meteor-client"
+    - "wurst"
+    - "aristois"
+
+  prohibited-channels:
+    - "baritone:channel"
+    - "c:baritone"
+    - "baritone"
+    - "wurst:command"
+    - "wurst:main"
+    - "meteor-client:main"
+    - "meteor:auth"
+    - "aristois:main"
+    - "liquidbounce:channel"
+    - "freecam:main"
+    - "c:freecam"
+    - "seedcracker:channel"
+    - "seedcrackerx:channel"
+    - "xaero:radar"
+    - "xaeroworldmap:radar"
+    - "voxelmap:radar"
+    - "journeymap:entity_radar"
+
+# ================================================================
+#                      WHITELIST CONFIGURATION
+# (Used when mode is set to "WHITELIST")
+# ================================================================
+whitelist:
+  allowed-brands:
+    - "vanilla"
+    - "fabric"
+    - "forge"
+    - "neoforge"
+    - "feather"
+    - "lunarclient"
+    - "badlion"
+    - "labymod"
+    - "quilt"
+
+  allowed-mods:
+    - "minecraft"
+    - "forge"
+    - "neoforge"
+    - "fabric"
+    - "fabricloader"
+    - "sodium"
+    - "iris"
+    - "optifine"
+    - "jei"
+    - "rei"
+    - "emi"
+    - "appleskin"
+    - "modmenu"
+    - "cloth-config"
+    - "dynamiclights"
+    - "simple-voice-chat"
+    - "voicechat"
+
+# ================================================================
+#                 RESOURCE PACK VERIFICATION
+# ================================================================
+resource-pack:
+  enforce-server-pack: false
+  on-declined-action: "KICK"
+  decline-message: "&cYou must accept the server resource pack to play on this server."
+
+# Storage & Logging
+logging:
+  log-to-console: true
+  log-to-file: true
+  history-file: "history.yml"

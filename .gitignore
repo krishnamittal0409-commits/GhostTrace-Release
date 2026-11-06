@@ -1,0 +1,6 @@
+target/classes/
+target/classes-java17/
+target/classes-java21/
+.idea/
+*.iml
+.vscode/
