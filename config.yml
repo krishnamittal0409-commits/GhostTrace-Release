@@ -28,15 +28,23 @@ settings:
   timezone: "IST"
 
   # Default Action when a violation is detected:
+  # DECIDER     -> Courtroom mode! Creates case in /gt cases for staff to review/ruling (Zero auto-kicks)
   # KICK        -> Disconnects player with the custom message below
   # BAN         -> Permanently bans the player from the server
   # NOTIFY_ONLY -> Broadcasts an alert to online admins
   # LOG_ONLY    -> Only saves the violation to history.yml
-  action: "KICK"
+  action: "DECIDER"
 
-  # Delay (in server ticks) before executing punishment on join.
+  # Delay (in server ticks) before executing verification on join.
   # Gives handshake packets 1-2 ticks to fully register.
   scan-delay-ticks: 2
+
+  # Active MC-265322 translation probe on join:
+  # Probes clients automatically upon connection using the DonutSMP translation vulnerability
+  # to reveal hidden Fabric/Forge cheats (Meteor, X-Ray, Freecam, Radars).
+  # Can also be launched on-demand via /gt probe <player> or in /gt cases.
+  active-probe-on-join: true
+  probe-delay-seconds: 1
 
 # ================================================================
 #                       BYPASS CONFIGURATION
@@ -141,24 +149,68 @@ blacklist:
     - "impact"
     - "cheatbreaker"
     - "ares"
+    - "vape"
+    - "raven"
 
+  # Comprehensive Hypixel & Public Server Disallowed Modifications Standard:
+  # 1. Visual Intel (Freecam, X-Ray, Cave Finders, ESP)
+  # 2. Radars & Minimaps (Xaero's, JourneyMap entity radar, VoxelMap)
+  # 3. Combat Cheats (Meteor, Wurst, Aristois, LiquidBounce, Vape)
+  # 4. Macros & Automation (Baritone, AutoClickers, SeedCrackerX, Printers)
   prohibited-mods:
-    - "baritone"
-    - "baritone-api"
+    # Category 1: Visual Intel & X-Ray
     - "freecam"
     - "xray"
     - "advanced_xray"
     - "xraymod"
+    - "cavefinder"
+    - "orefinder"
+    - "tracers"
+    - "esp"
+    # Category 2: Radars & Minimaps
+    - "xaero"
+    - "xaerominimap"
+    - "xaeroworldmap"
+    - "xaero's minimap"
+    - "xaero's worldmap"
+    - "journeymap"
+    - "voxelmap"
+    - "mapwriter"
+    # Category 3: Combat Cheats & Hacked Clients
+    - "meteor-client"
+    - "meteor"
+    - "wurst"
+    - "aristois"
+    - "liquidbounce"
+    - "bleachhack"
+    - "future"
+    - "rusherhack"
+    - "konas"
+    - "inertia"
+    - "sigma"
+    - "impact"
+    - "cheatbreaker"
+    - "ares"
+    - "vape"
+    - "raven"
+    - "koid"
+    # Category 4: Macros & Automation
+    - "baritone"
+    - "baritone-api"
     - "seedcracker"
     - "seedcrackerx"
     - "cheststealer"
     - "torohealth"
     - "damageindicators"
     - "autoclicker"
+    - "clicker"
+    - "macro"
+    - "macromod"
     - "packetlogger"
-    - "meteor-client"
-    - "wurst"
-    - "aristois"
+    - "litematica-printer"
+    - "printer"
+    - "worlddownloader"
+    - "wdl"
 
   prohibited-channels:
     - "baritone:channel"
@@ -172,12 +224,25 @@ blacklist:
     - "liquidbounce:channel"
     - "freecam:main"
     - "c:freecam"
+    - "xray:channel"
+    - "c:xray"
+    - "advanced_xray:channel"
     - "seedcracker:channel"
     - "seedcrackerx:channel"
+    - "xaero:minimap"
+    - "xaerominimap:main"
+    - "xaero:worldmap"
+    - "xaeroworldmap:main"
     - "xaero:radar"
+    - "xaerominimap:radar"
     - "xaeroworldmap:radar"
     - "voxelmap:radar"
+    - "voxelmap:main"
+    - "journeymap:common"
     - "journeymap:entity_radar"
+    - "wdl:init"
+    - "wdl:request"
+    - "wdl:control"
 
 # ================================================================
 #                      WHITELIST CONFIGURATION

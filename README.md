@@ -2,27 +2,24 @@
 
 **GhostTrace** is an enterprise-grade **100% server-side** client mod, launcher, and payload inspector anti-cheat designed for Minecraft servers across versions **1.20 through 1.21+ and future 26.x releases**.
 
-It combines **DonutSMP-style silent translation probing (MC-265322)** with a **Case Decider Courtroom UI**, allowing staff to review detected client mods and make deliberate rulings without automatic false-positive kicks or movement lag.
+It combines **DonutSMP-style silent translation probing (MC-265322)** with the **Hypixel Disallowed Modifications Standard** and a **Case Decider Courtroom UI**, allowing staff to review detected client mods and make deliberate rulings without automatic false-positive kicks or movement lag.
 
 ---
 
-## ⚡ Flagship Features
+## ⚡ Flagship Features (v1.0.5)
 
-1. **DonutSMP-Style Automated Mod Detection (MC-265322)**:
-   * **Automatic Join Scans**: Silently queries clients via hidden translation packets 15 ticks (0.75s) after joining.
-   * **Zero Screen Flashing**: Placed invisibly underground and closed in 2 ticks—completely unnoticeable to players.
-   * **Comprehensive Mod Detection**:
-     * **Freecam** (`key.freecam.toggle`, `text.freecam.title`, `category.freecam`)
-     * **X-Ray & Advanced X-Ray** (`key.xray.toggle`, `xray.title`, `category.xray`, `advanced_xray.title`)
-     * **Xaero's Minimap** (`gui.xaero_minimap`, `xaerominimap.title`, `key.xaero_toggle_map`)
-     * **Xaero's WorldMap** (`gui.xaeroworldmap.title`, `xaeroworldmap.title`)
-     * **Meteor Client** (`key.meteor-client.open-gui`, `title.meteor-client.modules`)
-     * **Wurst Client** (`key.wurst.open`, `text.wurst.title`)
-     * **SeedCrackerX**, **Baritone**, **JourneyMap**, **Litematica**, and shaders.
+1. **🛡️ 4-Stage Hypixel Disallowed Modifications Audit Pipeline**:
+   * Organizes silent translation probes strictly matching Hypixel's official Disallowed Modification policy:
+     * **Stage 1 (Visual Intel & X-Ray)**: Freecam (`key.freecam.toggle`, `text.freecam.title`), Advanced X-Ray (`key.xray.toggle`, `xray.title`), Cave Finders.
+     * **Stage 2 (Radars & Minimaps)**: Xaero's Minimap (`gui.xaero_minimap`, `xaerominimap.title`), Xaero's WorldMap (`gui.xaeroworldmap.title`), JourneyMap entity radar (`jm.common.title`).
+     * **Stage 3 (Combat Cheats & Hacked Clients)**: Meteor Client (`key.meteor-client.open-gui`, `title.meteor-client.modules`), Wurst (`key.wurst.open`), Aristois (`aristois.gui.title`), LiquidBounce, Vape.
+     * **Stage 4 (Macros & Automation)**: Baritone (`baritone.title`), AutoClicker (`key.autoclicker.toggle`), SeedCrackerX (`seedcrackerx.gui`), Litematica Printer (`litematica.gui.button.config_gui`).
+   * **Live Action Bar Progress**: Broadcasts real-time audit progress `[HYPIXEL AUDIT X/4]` to online staff.
+   * **Persistent Storage**: All Hypixel audit breakdowns are saved directly into `history.yml` under each player's session archive.
 
-2. **🔔 Immersive Action Bar Telemetry**:
-   * Instant action bar alerts delivered to staff whenever a player is probed, flagged, approved, warned, kicked, or banned.
-   * Status pills: `&8[ &c✖ THREAT DETECTED &8]` vs `&8[ &a✔ VERIFIED CLEAN &8]`.
+2. **🛡️ Hypixel Compliance Matrix GUI Card**:
+   * Embedded directly in `PlayerInspectGui` and `CaseDeciderGui` (Slot 28).
+   * Displays the 4-category breakdown with green/red status pills (`✔ PASSED` vs `✖ FLAGGED [ModName]`) and exact rule summaries.
 
 3. **Case Decider Courtroom UI (`/gt cases` & `/gt decide <player>`)**:
    * **Zero Automatic Disconnects**: Discovered mods create formal case dossiers instead of kicking players without permission.
@@ -31,7 +28,7 @@ It combines **DonutSMP-style silent translation probing (MC-265322)** with a **C
      * **[⚠ WARN PLAYER]**: Delivers a private security warning with the list of detected mods.
      * **[✕ KICK]**: Ejects player with an official staff ruling reason.
      * **[⛔ BAN]**: Permanent server ban with recorded incident ID (Shift-Click confirmation).
-     * **[🔍 RUN ACTIVE PROBE]**: Re-queries client translation keys in real time.
+     * **[🔍 RUN ACTIVE AUDIT]**: Launches the 4-stage Hypixel audit pipeline in real time.
 
 4. **🕒 Multi-Timezone System (Primary Standard: IST)**:
    * Native multi-timezone engine with **IST (`Asia/Kolkata`, UTC+05:30)** as primary standard.
@@ -61,7 +58,7 @@ It combines **DonutSMP-style silent translation probing (MC-265322)** with a **C
 | `/gt` or `/gt gui` | Opens the modern flagship control dashboard. | `ghosttrace.gui` |
 | `/gt cases` | Opens the interactive Courtroom & Case Decider queue. | `ghosttrace.admin` |
 | `/gt decide [player]` | Opens Case Decision dossier for suspect with evidence cards. | `ghosttrace.admin` |
-| `/gt probe <player>` | Launches multi-stage MC-265322 translation probe on suspect. | `ghosttrace.admin` |
+| `/gt probe <player>` | Launches 4-stage Hypixel MC-265322 translation audit on suspect. | `ghosttrace.admin` |
 | `/gt timezone` | Opens interactive timezone selector (Primary: IST). | `ghosttrace.gui` |
 | `/gt players` | Opens online player radar scanner. | `ghosttrace.gui` |
 | `/gt inspect <player>` | Opens deep telemetry dossier for online or offline player. | `ghosttrace.admin` |
@@ -80,9 +77,9 @@ It combines **DonutSMP-style silent translation probing (MC-265322)** with a **C
 
 ## 📦 Downloads & Releases
 
-Pre-compiled release JARs are available in the repository `releases/` directory:
+Pre-compiled release JARs are available in the repository `releases/` directory and in your `Downloads` folder:
 
-* **Java 17 Target** (Paper/Purpur 1.20 - 1.20.4): `releases/GhostTrace-1.0.4-Java17.jar`
-* **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.4-Java21.jar`
+* **Java 17 Target** (Paper/Purpur 1.20 - 1.20.4): `releases/GhostTrace-1.0.5-Java17.jar`
+* **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.5-Java21.jar`
 
 Copy the corresponding JAR to your server's `plugins/` directory and restart.
