@@ -293,3 +293,23 @@ logging:
   log-to-console: true
   log-to-file: true
   history-file: "history.yml"
+
+# ================================================================
+#              AUTOMATIC CLOUD UPDATES & DEFINITIONS
+# Over-The-Air (OTA) cheat definition sync and binary updates.
+# Keeps mod signatures, MC-265322 probe targets, and blacklists
+# up to date without altering plugin version (prevents network mismatch).
+# ================================================================
+auto-update:
+  enabled: true
+  repository: "krishnamittal0409-commits/GhostTrace-Release"
+  # Fetch latest cheat signatures on server boot
+  check-on-startup: true
+  # Periodic check interval in hours (Default: 6 hours)
+  check-interval-hours: 6
+  # Automatically synchronize probe targets and mod blacklist from cloud
+  sync-live-definitions: true
+  # Automatically download matching binary JAR into plugins/update/
+  auto-download-jar: false
+  # Notify administrators with 'ghosttrace.admin' permission on join
+  notify-staff: true

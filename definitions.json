@@ -1,0 +1,360 @@
+{
+  "definitionsVersion": 2026110901,
+  "lastUpdated": "2026-11-09T22:15:00+05:30",
+  "author": "Krishna Mittal",
+  "probeTargets": [
+    {
+      "modName": "Freecam",
+      "translationKey": "key.freecam.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "text.freecam.title",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "freecam.unfocused",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "key.xray.toggle",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "xray.title",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "xray.message.enabled",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Xaero's MiniMap",
+      "translationKey": "gui.xaero_minimap",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Xaero's MiniMap",
+      "translationKey": "xaerominimap.title",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Xaero's WorldMap",
+      "translationKey": "gui.xaeroworldmap.title",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Xaero's WorldMap",
+      "translationKey": "gui.xaero_worldmap_settings",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "JourneyMap",
+      "translationKey": "jm.common.title",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "JourneyMap",
+      "translationKey": "jm.webmap.title",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "VoxelMap",
+      "translationKey": "voxelmap.radar.players",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "VoxelMap",
+      "translationKey": "voxelmap.radar.mobs",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Meteor Client",
+      "translationKey": "key.meteor-client.open-gui",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Meteor Client",
+      "translationKey": "title.meteor-client.modules",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Wurst Client",
+      "translationKey": "key.wurst.open",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Wurst Client",
+      "translationKey": "wurst.title",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Aristois Client",
+      "translationKey": "aristois.gui.title",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Aristois Client",
+      "translationKey": "aristois.tab.mods",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "LiquidBounce",
+      "translationKey": "liquidbounce.title",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "LiquidBounce",
+      "translationKey": "key.liquidbounce.clickgui",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "BleachHack",
+      "translationKey": "bleachhack.gui.title",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Baritone",
+      "translationKey": "baritone.title",
+      "category": "BOT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "Baritone",
+      "translationKey": "baritone.prefix",
+      "category": "BOT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "AutoClicker",
+      "translationKey": "key.autoclicker.toggle",
+      "category": "MACRO",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "AutoClicker",
+      "translationKey": "autoclicker.title",
+      "category": "MACRO",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "SeedCrackerX",
+      "translationKey": "seedcrackerx.gui",
+      "category": "EXPLOIT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "SeedCrackerX",
+      "translationKey": "title.seedcrackerx",
+      "category": "EXPLOIT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "Litematica Printer",
+      "translationKey": "litematica.gui.button.config_gui",
+      "category": "MACRO",
+      "threatLevel": "MEDIUM",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "Litematica Printer",
+      "translationKey": "litematica.gui.label.schematic_placing",
+      "category": "MACRO",
+      "threatLevel": "MEDIUM",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "ChestStealer",
+      "translationKey": "key.cheststealer.toggle",
+      "category": "MACRO",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "InventoryMove",
+      "translationKey": "key.invmove.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "PrinterMod",
+      "translationKey": "printer.title",
+      "category": "MACRO",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "PrinterMod",
+      "translationKey": "key.printer.toggle",
+      "category": "MACRO",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "EntityESP",
+      "translationKey": "key.esp.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "BowAimbot",
+      "translationKey": "key.bowaimbot.toggle",
+      "category": "COMBAT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    }
+  ],
+  "prohibitedBrands": [
+    "meteor",
+    "wurst",
+    "aristois",
+    "liquidbounce",
+    "bleachhack",
+    "future",
+    "rusherhack",
+    "konas",
+    "inertia",
+    "sigma",
+    "impact",
+    "ares",
+    "coffee",
+    "jigsaw",
+    "kamiblue",
+    "lambda",
+    "phobos",
+    "pyro",
+    "salhack",
+    "root",
+    "vape",
+    "drip",
+    "dream",
+    "entropy",
+    "kura",
+    "novoline",
+    "rise",
+    "tenacity",
+    "azura",
+    "moon",
+    "exhi",
+    "flux",
+    "intent",
+    "neverlose",
+    "skeet",
+    "gamesense",
+    "hypnotic",
+    "mathax",
+    "cornos"
+  ],
+  "prohibitedMods": [
+    "meteor-client",
+    "wurst",
+    "baritone",
+    "aristois",
+    "bleachhack",
+    "liquidbounce",
+    "xray",
+    "advanced-xray",
+    "freecam",
+    "autoclicker",
+    "auto-clicker",
+    "seedcracker",
+    "seedcrackerx",
+    "cheststealer",
+    "invmove",
+    "printer",
+    "schematica-printer",
+    "litematica-printer",
+    "entityesp",
+    "bowaimbot",
+    "killaura",
+    "flight",
+    "speed",
+    "nofall",
+    "fastbreak",
+    "fastplace",
+    "scaffold",
+    "step",
+    "jesus",
+    "spider",
+    "timer"
+  ],
+  "prohibitedChannels": [
+    "meteor:client",
+    "wurst:channel",
+    "wurst:cpc",
+    "aristois:channel",
+    "baritone:channel",
+    "liquidbounce:channel",
+    "impact:impact",
+    "bleachhack:main",
+    "xaerominimap:main",
+    "xaerominimap:radar",
+    "xaeroworldmap:radar",
+    "voxelmap:radar",
+    "voxelmap:main",
+    "journeymap:common",
+    "journeymap:entity_radar",
+    "wdl:init",
+    "wdl:request",
+    "wdl:control"
+  ]
+}
