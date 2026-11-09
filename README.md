@@ -83,3 +83,11 @@ Pre-compiled release JARs are available in the repository `releases/` directory 
 * **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.5-Java21.jar`
 
 Copy the corresponding JAR to your server's `plugins/` directory and restart.
+
+---
+
+## 📜 Author & Proprietary Rights
+
+* **Author**: **Krishna Mittal**
+* **Ownership**: All rights, title, and intellectual property in GhostTrace belong exclusively to **Krishna Mittal**.
+* **Copyright**: © 2026 Krishna Mittal. All rights reserved.
