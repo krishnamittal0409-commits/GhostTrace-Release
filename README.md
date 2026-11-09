@@ -1,46 +1,51 @@
-# GhostTrace 🛡️ (Public Release Distribution)
+# GhostTrace 🛡️ (Flagship Network Anti-Cheat & Courtroom Suite)
 
-**GhostTrace** is an enterprise-grade, **100% server-side** client mod, launcher, and payload inspector anti-cheat for Paper, Bukkit, Purpur, and Hybrid modded servers (Arclight, Mohist, Magma, Cardboard) across Minecraft **1.20 through 1.21+ and future releases (26.x)**.
+**GhostTrace** is an enterprise-grade **100% server-side** client mod, launcher, and payload inspector anti-cheat designed for Minecraft servers across versions **1.20 through 1.21+ and future 26.x releases**.
 
-Unlike traditional anti-cheats that produce false-positive jump or fly kicks during latency spikes, **GhostTrace does zero movement checks**. It strictly inspects client connection metadata, Forge/NeoForge mod handshakes, and registered custom payload channels.
-
----
-
-## 📥 Downloads (Multi-Java Releases)
-
-Download the JAR build corresponding to your server's Java runtime:
-
-| Release Artifact | Target Java | Compatible Minecraft Versions | Description |
-| :--- | :---: | :---: | :--- |
-| [**`GhostTrace-1.0.0-Java17.jar`**](releases/GhostTrace-1.0.0-Java17.jar) | **Java 17** | Minecraft **1.20.0 – 1.20.4** | For servers operating on Java 17 LTS runtimes. |
-| [**`GhostTrace-1.0.0-Java21.jar`**](releases/GhostTrace-1.0.0-Java21.jar) | **Java 21+** | Minecraft **1.20.5 – 1.21.x & 26.x** | Optimized for modern servers requiring Java 21 LTS+. |
+It combines **DonutSMP-style active translation probing (MC-265322)** with a **Case Decider Courtroom UI**, allowing staff to review detected client mods and make deliberate rulings without automatic false-positive kicks or movement lag.
 
 ---
 
-## ⚡ Core Features
+## ⚡ Flagship Features
 
-* **🕒 Multi-Timezone System (Primary: IST)**: Full timezone selector in GUI supporting **IST (India Standard Time, UTC+05:30)**, UTC, EST, CST, PST, GMT, CET, JST, and AEST. All ban screens and audit timelines display exact timestamps with timezone offsets.
-* **Zero Movement Checks**: Pure client-environment verification eliminates 100% of lag-induced movement false kicks.
-* **Launcher & Brand Detection**: Inspects `minecraft:brand` to reveal Vanilla, Fabric, Forge, NeoForge, Feather, Lunar, Badlion, or cheat clients (Meteor, Aristois, LiquidBounce, etc.).
-* **Handshake Mod List Extraction**: Decodes Forge & NeoForge `fml:handshake` / `forge:handshake` packets to uncover every active client mod ID and version.
-* **Channel Fingerprinting**: Captures stealth mods that register channels via `PlayerRegisterChannelEvent` (Baritone, Freecam, Wurst, SeedCracker, Radars, and Iris shader configs).
-* **⚡ Mod Version Enforcer & Remote Disabler**: Enforce minimum versions (e.g. `simple-voice-chat:2.5.0`, `sodium:0.5.8`) or force-disable specific mods (`:DISABLED`). Outdated clients are prompted to update with customizable join messages.
-* **🚫 Configurable 20-Attempt IP-Ban**: Optional security trigger that automatically IP-bans repeat offenders attempting to connect with blacklisted software.
-* **🎨 Modern Sidebar Dashboard GUI**: Flagship Lunar/Badlion-style sidebar dock interface with real-time radar, audit logs, and settings toggles.
-* **🔑 LuckPerms Integration**: Automatic synchronization with LuckPerms 5.4+ displaying player primary ranks and prefixes in alerts and GUI cards.
-* **📜 Historical Session Logs**: Permanent tracking of exact connection timestamps, loaded mods, IP addresses, and brand signatures for online and offline players.
+1. **DonutSMP-Style Active Mod Detection (MC-265322)**:
+   * Probes clients using translatable components to force-reveal hidden Fabric cheats, radar mods, and utilities even when the client never registers a custom channel or Forge handshake.
+   * Probes for: **Meteor Client**, **Wurst**, **Aristois**, **LiquidBounce**, **Advanced X-Ray**, **Freecam**, **Xaero's WorldMap/MiniMap**, **JourneyMap**, **SeedCrackerX**, **Baritone**, **Litematica**, and shaders.
+   * On-demand scan via `/gt probe <player>`, automated join probes, or one-click scans from the Decider UI.
+
+2. **Case Decider Courtroom UI (`/gt cases` & `/gt decide <player>`)**:
+   * **Zero Automatic Disconnects**: Discovered mods create formal case dossiers instead of kicking players without permission.
+   * Interactive Courtroom Actions:
+     * **[✔ APPROVE / DISMISS]**: Clears case for this session.
+     * **[⚠ WARN PLAYER]**: Delivers a private security warning with the list of detected mods.
+     * **[✕ KICK]**: Ejects player with an official staff ruling reason.
+     * **[⛔ BAN]**: Permanent server ban with recorded incident ID.
+     * **[🔍 RUN ACTIVE SCAN NOW]**: Real-time packet probe query.
+
+3. **🕒 Multi-Timezone System (Primary Standard: IST)**:
+   * Native multi-timezone engine with **IST (`Asia/Kolkata`, UTC+05:30)** as primary standard.
+   * Interactive GUI switcher supporting **IST**, **UTC**, **EST**, **CST**, **PST**, **GMT**, **CET**, **JST**, and **AEST**.
+
+4. **Multi-Java Architecture (Java 17 & Java 21)**:
+   * Compiled and optimized separately for both **Java 17** (Paper 1.20 - 1.20.4) and **Java 21** (Paper 1.20.5+ through 26.x).
+
+5. **Mod Version Enforcer & Remote Disabler**:
+   * Block outdated mod versions or disable specific mods remotely via semantic version comparison.
+
+6. **Repeated Attempts IP-Ban Condition**:
+   * Configurable threshold (default 20 attempts) to automatically ban IPs that persistently attempt connections with prohibited software.
 
 ---
 
-## 🚀 Quick Start Guide
+## 🌐 Server Platform & Version Compatibility
 
-1. Download the appropriate JAR file for your server from the [`releases/`](releases/) folder:
-   * **Java 17**: `GhostTrace-1.0.0-Java17.jar`
-   * **Java 21**: `GhostTrace-1.0.0-Java21.jar`
-2. Drop the JAR into your server's `plugins/` directory.
-3. Start or restart your server.
-4. Customize rules and messages in `plugins/GhostTrace/config.yml`.
-5. Run `/gt gui` in-game to access the dashboard.
+| Platform | Support | Notes |
+| :--- | :---: | :--- |
+| **Paper / Purpur** | **Native** | Optimal performance; utilizes Paper client brand detection and Adventure components. |
+| **Spigot / CraftBukkit** | **Native** | Fully compatible; uses fallback channel brand listener. |
+| **Fabric** | **Native via Hybrid** | Compatible on Fabric servers running **Arclight (Fabric)** or **Cardboard**. |
+| **Forge / NeoForge** | **Native via Hybrid** | Compatible on Forge/NeoForge servers running **Mohist**, **Arclight**, or **Magma**. |
+| **Versions** | **1.20 → 26.x** | Built strictly without volatile NMS imports to guarantee upward and downward version compatibility. |
 
 ---
 
@@ -48,22 +53,31 @@ Download the JAR build corresponding to your server's Java runtime:
 
 | Command | Description | Permission |
 | :--- | :--- | :--- |
-| `/gt` or `/gt gui` | Opens the modern interactive control dashboard. | `ghosttrace.gui` |
-| `/gt players` | Opens the live online player radar. | `ghosttrace.gui` |
-| `/gt versions` | Opens the Mod Version Enforcer & Disabler tab. | `ghosttrace.admin` |
-| `/gt logs` | Opens the historical session audit timeline. | `ghosttrace.admin` |
-| `/gt inspect <player>` | Inspects live or offline player dossier. | `ghosttrace.admin` |
-| `/gt bypass <add\|remove> <id>` | Adds/removes a player or UUID from tracking bypass. | `ghosttrace.admin` |
-| `/gt reload` | Hot-reloads configuration and database. | `ghosttrace.admin` |
+| `/gt` or `/gt gui` | Opens the modern flagship control dashboard. | `ghosttrace.gui` |
+| `/gt cases` | Opens the interactive Courtroom & Case Decider queue. | `ghosttrace.admin` |
+| `/gt decide [player]` | Opens Case Decision dossier for suspect with evidence cards. | `ghosttrace.admin` |
+| `/gt probe <player>` | Launches active MC-265322 translation probe on suspect. | `ghosttrace.admin` |
+| `/gt timezone` | Opens interactive timezone selector (Primary: IST). | `ghosttrace.gui` |
+| `/gt players` | Opens online player radar scanner. | `ghosttrace.gui` |
+| `/gt inspect <player>` | Opens deep telemetry dossier for online or offline player. | `ghosttrace.admin` |
+| `/gt versions` | Opens Version Enforcer GUI. | `ghosttrace.admin` |
+| `/gt logs` | Historical session timeline with exact mod dumps. | `ghosttrace.admin` |
+| `/gt bypass <add\|remove> <id>` | Manages tracking bypass list. | `ghosttrace.admin` |
+| `/gt reload` | Hot-reloads configuration and storage. | `ghosttrace.admin` |
 
 ### Permissions
-* `ghosttrace.admin` – Full administrative control.
-* `ghosttrace.gui` – Permission to open the control panel.
-* `ghosttrace.alerts` – In-game real-time broadcast alerts on illegal mod discoveries.
-* `ghosttrace.bypass` – Complete exemption from all mod and brand verification checks.
+* `ghosttrace.admin` - Full access to all commands and administrative actions (default: `op`).
+* `ghosttrace.gui` - Permission to open and navigate the GhostTrace GUI (default: `op`).
+* `ghosttrace.alerts` - Receives real-time broadcast alerts on illegal joins (default: `op`).
+* `ghosttrace.bypass` - Exempts player from client brand and mod enforcement checks.
 
 ---
 
-## 📄 License & Distribution
+## 📦 Downloads & Releases
 
-Distributed as public releases. For private enterprise inquiries or source code repository access, contact the repository maintainer.
+Pre-compiled release JARs are available in the repository `releases/` directory:
+
+* **Java 17 Target** (Paper/Purpur 1.20 - 1.20.4): `releases/GhostTrace-1.0.3-Java17.jar`
+* **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.3-Java21.jar`
+
+Copy the corresponding JAR to your server's `plugins/` directory and restart.
