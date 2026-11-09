@@ -111,25 +111,24 @@ session-logging:
 # Customizable Messages
 messages:
   kick-reason: |-
-    &c&l[GhostTrace Security]
+    &cDisconnected by Server
     
-    &7An illegal mod, client, or channel was detected on your client:
-    &e%illegal_item% &8(&7Type: &f%category%&8)
+    &7Prohibited client modification detected:
+    &c%illegal_item% &8(%category%)
     
-    &cRemove this mod, only then you will be able to join the server.
-    &8Logged at: &7%timestamp_detailed%
+    &7Please remove this mod before rejoining.
   
   ban-reason: |-
-    &c&l[GhostTrace Security]
+    &cPermanently Banned
     
-    &cYou have been permanently banned for joining with prohibited client software:
-    &e%illegal_item% &8(&7Type: &f%category%&8)
-    &8Logged at: &7%timestamp_detailed%
+    &7Reason: Use of prohibited client modification
+    &7Offense: &c%illegal_item% &8(%category%)
+    &7Time: &f%timestamp%
   
-  admin-alert: "&8[&bGhost&3Trace&8] &cAlert: &e%player% &7attempted to join with illegal %category%: &c%illegal_item% &7(Client: &b%brand%&7) &8[%timestamp%]"
-  ip-ban-alert: "&8[&bGhost&3Trace&8] &4&lIP-BAN: &e%player% &7(IP: &f%ip%&7) automatically IP-banned after exceeding %attempts% attempts! &8[%timestamp%]"
+  admin-alert: "&8[&bGhostTrace&8] &cViolation: &e%player% &7flagged for &c%illegal_item% &8(%category%) &8| &7Client: &b%brand%"
+  ip-ban-alert: "&8[&bGhostTrace&8] &4IP-Ban: &e%player% &7(IP: &f%ip%&7) banned after %attempts% failed attempts."
   no-permission: "&cYou do not have permission to execute this command."
-  reload-success: "&aGhostTrace configuration reloaded successfully!"
+  reload-success: "&aGhostTrace configuration reloaded successfully."
 
 # ================================================================
 #                      BLACKLIST CONFIGURATION
