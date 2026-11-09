@@ -95,7 +95,8 @@ ip-ban-on-attempts:
     
     &cYour IP has been permanently banned from this network.
     &7Reason: Exceeded %max_attempts% connection attempts with prohibited mods/clients.
-    &7Offending Client: &e%illegal_item% &7(%category%)
+    &7Offending Client / Modifications:
+    %illegal_mods%
     &7Incident Time: &f%timestamp_detailed%
 
 # ================================================================
@@ -113,17 +114,18 @@ messages:
   kick-reason: |-
     &cDisconnected by Server
     
-    &7Prohibited client modification detected:
-    &c%illegal_item% &8(%category%)
+    &7Prohibited client modification(s) detected:
+    %illegal_mods%
     
-    &7Please remove this mod before rejoining.
+    &7Please remove all prohibited modifications before rejoining.
   
   ban-reason: |-
-    &cPermanently Banned
+    &cPermanently Banned by Server
     
-    &7Reason: Use of prohibited client modification
-    &7Offense: &c%illegal_item% &8(%category%)
-    &7Time: &f%timestamp%
+    &7Prohibited client modification(s) detected:
+    %illegal_mods%
+    
+    &7Timestamp: &f%timestamp%
   
   admin-alert: "&8[&bGhostTrace&8] &cViolation: &e%player% &7flagged for &c%illegal_item% &8(%category%) &8| &7Client: &b%brand%"
   ip-ban-alert: "&8[&bGhostTrace&8] &4IP-Ban: &e%player% &7(IP: &f%ip%&7) banned after %attempts% failed attempts."
