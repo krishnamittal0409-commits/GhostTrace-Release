@@ -6,7 +6,7 @@ It combines **DonutSMP-style silent translation probing (MC-265322)** with the *
 
 ---
 
-## ⚡ Flagship Features (v1.0.5)
+## ⚡ Flagship Features (v1.0.6)
 
 1. **🛡️ 4-Stage Hypixel Disallowed Modifications Audit Pipeline**:
    * Organizes silent translation probes strictly matching Hypixel's official Disallowed Modification policy:
@@ -79,8 +79,9 @@ It combines **DonutSMP-style silent translation probing (MC-265322)** with the *
 
 Pre-compiled release JARs are available in the repository `releases/` directory and in your `Downloads` folder:
 
-* **Java 17 Target** (Paper/Purpur 1.20 - 1.20.4): `releases/GhostTrace-1.0.5-Java17.jar`
-* **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.5-Java21.jar`
+* **Java 17 Target** (Paper/Purpur 1.20 - 1.20.4): `releases/GhostTrace-1.0.6-Java17.jar`
+* **Java 21 Target** (Paper/Purpur 1.20.5 - 26.x+): `releases/GhostTrace-1.0.6-Java21.jar`
+* **Default JAR**: `releases/GhostTrace-1.0.6.jar`
 
 Copy the corresponding JAR to your server's `plugins/` directory and restart.
 

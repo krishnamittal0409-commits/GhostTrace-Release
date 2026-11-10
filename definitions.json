@@ -1,6 +1,6 @@
 {
-  "definitionsVersion": 2026111001,
-  "lastUpdated": "2026-11-10T13:10:00+05:30",
+  "definitionsVersion": 2026111002,
+  "lastUpdated": "2026-11-10T13:35:00+05:30",
   "author": "Krishna Mittal",
   "probeTargets": [
     {
@@ -56,6 +56,20 @@
       "modName": "Freecam",
       "translationKey": "key.freecam.toggle",
       "category": "EXPLOIT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "key.freecam.config",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "key.freecam.player",
+      "category": "EXPLOIT",
       "threatLevel": "HIGH",
       "hypixelCategory": "VISUAL_INTEL"
     },
@@ -68,7 +82,49 @@
     },
     {
       "modName": "Freecam",
+      "translationKey": "msg.freecam.enable",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
       "translationKey": "freecam.unfocused",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam (Meteor)",
+      "translationKey": "meteor.module.freecam",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam (Wurst)",
+      "translationKey": "wurst.module.freecam",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam (Aristois)",
+      "translationKey": "aristois.mod.freecam",
+      "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "modmenu.summaryTranslation.freecam",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Freecam",
+      "translationKey": "modmenu.descriptionTranslation.freecam",
       "category": "EXPLOIT",
       "threatLevel": "HIGH",
       "hypixelCategory": "VISUAL_INTEL"
