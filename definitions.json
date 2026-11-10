@@ -1,8 +1,57 @@
 {
-  "definitionsVersion": 2026110901,
-  "lastUpdated": "2026-11-09T22:15:00+05:30",
+  "definitionsVersion": 2026111001,
+  "lastUpdated": "2026-11-10T13:10:00+05:30",
   "author": "Krishna Mittal",
   "probeTargets": [
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "key.xray.toggle",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "xray.title",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "key.xray_toggle",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "key.x-ray.toggle",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Advanced X-Ray",
+      "translationKey": "xray.message.enabled",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Simple X-Ray",
+      "translationKey": "key.simple_xray.toggle",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Simple X-Ray",
+      "translationKey": "simple_xray.title",
+      "category": "XRAY",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
     {
       "modName": "Freecam",
       "translationKey": "key.freecam.toggle",
@@ -25,24 +74,38 @@
       "hypixelCategory": "VISUAL_INTEL"
     },
     {
-      "modName": "Advanced X-Ray",
-      "translationKey": "key.xray.toggle",
-      "category": "XRAY",
-      "threatLevel": "CRITICAL",
+      "modName": "Entity ESP",
+      "translationKey": "key.esp.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
       "hypixelCategory": "VISUAL_INTEL"
     },
     {
-      "modName": "Advanced X-Ray",
-      "translationKey": "xray.title",
-      "category": "XRAY",
-      "threatLevel": "CRITICAL",
+      "modName": "Player Tracers",
+      "translationKey": "key.tracers.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
       "hypixelCategory": "VISUAL_INTEL"
     },
     {
-      "modName": "Advanced X-Ray",
-      "translationKey": "xray.message.enabled",
-      "category": "XRAY",
-      "threatLevel": "CRITICAL",
+      "modName": "Player ESP",
+      "translationKey": "key.playeresp.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Chest ESP",
+      "translationKey": "key.chestesp.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "VISUAL_INTEL"
+    },
+    {
+      "modName": "Nametags Hack",
+      "translationKey": "key.nametags.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
       "hypixelCategory": "VISUAL_INTEL"
     },
     {
@@ -74,32 +137,130 @@
       "hypixelCategory": "RADARS_MINIMAPS"
     },
     {
-      "modName": "JourneyMap",
+      "modName": "JourneyMap Radar",
       "translationKey": "jm.common.title",
       "category": "RADAR",
       "threatLevel": "HIGH",
       "hypixelCategory": "RADARS_MINIMAPS"
     },
     {
-      "modName": "JourneyMap",
+      "modName": "JourneyMap Radar",
       "translationKey": "jm.webmap.title",
       "category": "RADAR",
       "threatLevel": "HIGH",
       "hypixelCategory": "RADARS_MINIMAPS"
     },
     {
-      "modName": "VoxelMap",
+      "modName": "VoxelMap Radar",
       "translationKey": "voxelmap.radar.players",
       "category": "RADAR",
       "threatLevel": "HIGH",
       "hypixelCategory": "RADARS_MINIMAPS"
     },
     {
-      "modName": "VoxelMap",
+      "modName": "VoxelMap Radar",
       "translationKey": "voxelmap.radar.mobs",
       "category": "RADAR",
       "threatLevel": "HIGH",
       "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Player Tracker",
+      "translationKey": "key.playertracker.toggle",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Player Tracker",
+      "translationKey": "playertracker.title",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "Entity Radar",
+      "translationKey": "radar.players",
+      "category": "RADAR",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "RADARS_MINIMAPS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "meteor.module.kill-aura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "meteor.module.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "meteor.module.aura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "wurst.module.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "wurst.hack.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "aristois.mod.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "liquidbounce.module.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "module.killaura.name",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "key.killaura.toggle",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "key.killaura",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "KillAura",
+      "translationKey": "killaura.title",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
     },
     {
       "modName": "Meteor Client",
@@ -137,22 +298,8 @@
       "hypixelCategory": "COMBAT_CHEATS"
     },
     {
-      "modName": "Aristois Client",
-      "translationKey": "aristois.tab.mods",
-      "category": "HACK_CLIENT",
-      "threatLevel": "CRITICAL",
-      "hypixelCategory": "COMBAT_CHEATS"
-    },
-    {
       "modName": "LiquidBounce",
       "translationKey": "liquidbounce.title",
-      "category": "HACK_CLIENT",
-      "threatLevel": "CRITICAL",
-      "hypixelCategory": "COMBAT_CHEATS"
-    },
-    {
-      "modName": "LiquidBounce",
-      "translationKey": "key.liquidbounce.clickgui",
       "category": "HACK_CLIENT",
       "threatLevel": "CRITICAL",
       "hypixelCategory": "COMBAT_CHEATS"
@@ -161,6 +308,34 @@
       "modName": "BleachHack",
       "translationKey": "bleachhack.gui.title",
       "category": "HACK_CLIENT",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Aimbot",
+      "translationKey": "key.aimbot.toggle",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Triggerbot",
+      "translationKey": "key.triggerbot.toggle",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Reach Hack",
+      "translationKey": "key.reach.toggle",
+      "category": "COMBAT_CHEATS",
+      "threatLevel": "CRITICAL",
+      "hypixelCategory": "COMBAT_CHEATS"
+    },
+    {
+      "modName": "Hitboxes Hack",
+      "translationKey": "key.hitboxes.toggle",
+      "category": "COMBAT_CHEATS",
       "threatLevel": "CRITICAL",
       "hypixelCategory": "COMBAT_CHEATS"
     },
@@ -186,13 +361,6 @@
       "hypixelCategory": "MACRO_AUTOMATION"
     },
     {
-      "modName": "AutoClicker",
-      "translationKey": "autoclicker.title",
-      "category": "MACRO",
-      "threatLevel": "HIGH",
-      "hypixelCategory": "MACRO_AUTOMATION"
-    },
-    {
       "modName": "SeedCrackerX",
       "translationKey": "seedcrackerx.gui",
       "category": "EXPLOIT",
@@ -200,10 +368,17 @@
       "hypixelCategory": "MACRO_AUTOMATION"
     },
     {
-      "modName": "SeedCrackerX",
-      "translationKey": "title.seedcrackerx",
+      "modName": "InventoryMove",
+      "translationKey": "key.invmove.toggle",
       "category": "EXPLOIT",
-      "threatLevel": "CRITICAL",
+      "threatLevel": "HIGH",
+      "hypixelCategory": "MACRO_AUTOMATION"
+    },
+    {
+      "modName": "ChestStealer",
+      "translationKey": "key.cheststealer.toggle",
+      "category": "EXPLOIT",
+      "threatLevel": "HIGH",
       "hypixelCategory": "MACRO_AUTOMATION"
     },
     {
@@ -214,53 +389,11 @@
       "hypixelCategory": "MACRO_AUTOMATION"
     },
     {
-      "modName": "Litematica Printer",
-      "translationKey": "litematica.gui.label.schematic_placing",
-      "category": "MACRO",
-      "threatLevel": "MEDIUM",
-      "hypixelCategory": "MACRO_AUTOMATION"
-    },
-    {
-      "modName": "ChestStealer",
-      "translationKey": "key.cheststealer.toggle",
-      "category": "MACRO",
-      "threatLevel": "HIGH",
-      "hypixelCategory": "MACRO_AUTOMATION"
-    },
-    {
-      "modName": "InventoryMove",
-      "translationKey": "key.invmove.toggle",
-      "category": "EXPLOIT",
-      "threatLevel": "HIGH",
-      "hypixelCategory": "COMBAT_CHEATS"
-    },
-    {
-      "modName": "PrinterMod",
-      "translationKey": "printer.title",
-      "category": "MACRO",
-      "threatLevel": "HIGH",
-      "hypixelCategory": "MACRO_AUTOMATION"
-    },
-    {
       "modName": "PrinterMod",
       "translationKey": "key.printer.toggle",
       "category": "MACRO",
       "threatLevel": "HIGH",
       "hypixelCategory": "MACRO_AUTOMATION"
-    },
-    {
-      "modName": "EntityESP",
-      "translationKey": "key.esp.toggle",
-      "category": "EXPLOIT",
-      "threatLevel": "HIGH",
-      "hypixelCategory": "VISUAL_INTEL"
-    },
-    {
-      "modName": "BowAimbot",
-      "translationKey": "key.bowaimbot.toggle",
-      "category": "COMBAT",
-      "threatLevel": "CRITICAL",
-      "hypixelCategory": "COMBAT_CHEATS"
     }
   ],
   "prohibitedBrands": [
@@ -302,7 +435,9 @@
     "gamesense",
     "hypnotic",
     "mathax",
-    "cornos"
+    "cornos",
+    "xray",
+    "killaura"
   ],
   "prohibitedMods": [
     "meteor-client",
@@ -313,6 +448,9 @@
     "liquidbounce",
     "xray",
     "advanced-xray",
+    "advancedxray",
+    "simple-xray",
+    "x-ray",
     "freecam",
     "autoclicker",
     "auto-clicker",
@@ -326,6 +464,12 @@
     "entityesp",
     "bowaimbot",
     "killaura",
+    "kill-aura",
+    "aimbot",
+    "triggerbot",
+    "reach",
+    "hitboxes",
+    "playertracker",
     "flight",
     "speed",
     "nofall",
@@ -335,12 +479,14 @@
     "step",
     "jesus",
     "spider",
-    "timer"
+    "timer",
+    "vape"
   ],
   "prohibitedChannels": [
     "meteor:client",
     "wurst:channel",
     "wurst:cpc",
+    "wurst:command",
     "aristois:channel",
     "baritone:channel",
     "liquidbounce:channel",
@@ -353,6 +499,10 @@
     "voxelmap:main",
     "journeymap:common",
     "journeymap:entity_radar",
+    "killaura:channel",
+    "xray:channel",
+    "advanced_xray:channel",
+    "vape:channel",
     "wdl:init",
     "wdl:request",
     "wdl:control"
