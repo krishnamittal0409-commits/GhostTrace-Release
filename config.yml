@@ -59,8 +59,8 @@ checks:
 
   inventory-manager:
     enabled: true
-    # Flags impossible click speeds (e.g. 4 slot clicks in < 120ms)
-    max-cps: 9
+    # Maximum inventory CPS before flagging (Tuned to 14 to accommodate pro 1-9 hotkeying and ping bursts)
+    max-cps: 14
     # Detects InvMove (clicking inventory while sprinting or moving)
     check-invmove: true
 
