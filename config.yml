@@ -107,15 +107,24 @@ replays:
 
 # ================================================================
 #                       BYPASS CONFIGURATION
-# Players or IDs listed here will NOT be tracked, scanned, or logged.
+# Players, UUIDs, or IP addresses listed here will NOT be tracked,
+# scanned, or logged. Manage dynamically via:
+#   /gt bypass list
+#   /gt bypass add <player/uuid/ip>
+#   /gt bypass remove <player/uuid/ip>
 # ================================================================
 bypass:
-  exempt-players:
-    - "YourAdminNameHere"
-    - "00000000-0000-0000-0000-000000000000"
+  # List of player usernames or UUIDs exempt from scanning (Default: empty)
+  # Examples:
+  #   - "AdminPlayer"
+  #   - "346f59c2-b6e3-37df-8917-02d466e934d7"
+  exempt-players: []
 
-  exempt-ips:
-    - "127.0.0.1"
+  # List of IP addresses exempt from scanning (Default: empty)
+  # Note: Do not place 127.0.0.1 here unless you want all local testing ignored!
+  # Examples:
+  #   - "192.168.1.100"
+  exempt-ips: []
 
 # ================================================================
 #         MOD VERSION ENFORCEMENT & REMOTE DISABLER
