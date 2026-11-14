@@ -40,12 +40,56 @@ settings:
   # Gives handshake packets 1-2 ticks to fully register.
   scan-delay-ticks: 2
 
-  # Active MC-265322 translation probe on join:
-  # Probes clients automatically upon connection using the DonutSMP translation vulnerability
-  # to reveal hidden Fabric/Forge cheats (Meteor, X-Ray, Freecam, Radars).
-  # Can also be launched on-demand via /gt probe <player> or in /gt cases.
+  # Active probe on join (performs instant non-invasive signature and behavioral checks)
   active-probe-on-join: true
   probe-delay-seconds: 1
+
+# ================================================================
+#                 REAL-TIME CHEAT & EXPLOIT DETECTIONS
+# High-performance behavioral checks for PvP, Lifesteal, and SMP servers.
+# Detects Freecam, Inventory Manager, AutoClicker, Scaffold, KillAura.
+# ================================================================
+checks:
+  freecam:
+    enabled: true
+    # Detects detached camera looking through solid stone/deepslate at caves/ores
+    detect-occluded-vision: true
+    # Detects remote interactions (> 5.0m or through solid occluding blocks)
+    detect-remote-interaction: true
+
+  inventory-manager:
+    enabled: true
+    # Flags impossible click speeds (e.g. 4 slot clicks in < 120ms)
+    max-cps: 9
+    # Detects InvMove (clicking inventory while sprinting or moving)
+    check-invmove: true
+
+  autoclicker:
+    enabled: true
+    # Maximum CPS before flagging (18+ is super-human in vanilla)
+    max-cps: 18
+    # Detects robotic click timing (software macros with stdDev < 5.8ms)
+    check-consistency: true
+    # Flags clicking while eating, drinking potions, or blocking with shield
+    check-consuming: true
+
+  fastplace-scaffold:
+    enabled: true
+    # Flags placing blocks faster than vanilla 4-tick (200ms) delay
+    check-fastplace: true
+    # Flags Scaffold/Auto-Bridge (placing under feet while looking forward/upwards)
+    check-scaffold: true
+
+  killaura:
+    enabled: true
+    # Flags attack reach > 3.8m in survival
+    max-reach: 3.8
+    # Flags hitting targets > 70° off crosshair
+    max-angle: 70.0
+    # Flags hitting multiple targets in the same tick (Multi-Aura)
+    check-multi-target: true
+    # Flags hitting through solid walls
+    check-wallhack: true
 
 # ================================================================
 #                       BYPASS CONFIGURATION
