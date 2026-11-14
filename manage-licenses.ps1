@@ -1,6 +1,6 @@
 ﻿# ==============================================================================
 # GhostTrace - License & Cloud Anti-Piracy Manager (IP:Port Node-Locked)
-# Author: Krishna Mittal
+# Author: Krishna Mittal • All Rights Reserved
 # ==============================================================================
 
 param (
@@ -11,7 +11,7 @@ param (
     [string]$Target,
 
     [Parameter(Position=2)]
-    [string]$NewTarget
+    [string]$Param2
 )
 
 $GistDir = "$PSScriptRoot\gist-control"
@@ -48,9 +48,16 @@ function Normalize-Address ($addr) {
     return $clean
 }
 
+function Ensure-LabelsObject ($data) {
+    if ($null -eq $data.server_labels) {
+        $data | Add-Member -MemberType NoteProperty -Name "server_labels" -Value ([PSCustomObject]@{}) -Force
+    }
+}
+
 switch ($Action.ToLower()) {
     "list" {
         $data = Get-Content $JsonPath -Raw | ConvertFrom-Json
+        Ensure-LabelsObject $data
         Write-Host "==============================================" -ForegroundColor Cyan
         Write-Host "     GHOSTTRACE IP:PORT NODE-LOCKED CLOUD     " -ForegroundColor Cyan
         Write-Host "==============================================" -ForegroundColor Cyan
@@ -59,26 +66,38 @@ switch ($Action.ToLower()) {
         Write-Host "Emergency Kill-Switch : " -NoNewline
         Write-Host $killStatus -ForegroundColor $killColor
 
-        $gateMode = if ($null -ne $data.enforce_ip_lock -and -not $data.enforce_ip_lock) { "PUBLIC ACCESS (ALL ALLOWED)" } else { "STRICT (WHITELIST ENFORCED)" }
-        $gateColor = if ($data.enforce_ip_lock -eq $false) { "Green" } else { "Yellow" }
-        Write-Host "Gatekeeper Mode       : " -NoNewline
-        Write-Host $gateMode -ForegroundColor $gateColor
+        $gateMode = if ($null -ne $data.enforce_ip_lock) { $data.enforce_ip_lock } else { $true }
+        $gateStatus = if ($gateMode) { "STRICT (Only authorized IPs can run)" } else { "PUBLIC ACCESS (Unlocked globally)" }
+        $gateColor = if ($gateMode) { "Yellow" } else { "Green" }
+        Write-Host "Gatekeeper Shield     : " -NoNewline
+        Write-Host $gateStatus -ForegroundColor $gateColor
 
-        Write-Host "`nAuthorized Server Addresses (IP:Port):" -ForegroundColor Yellow
+        Write-Host "`nAuthorized Server Bindings & Owners:" -ForegroundColor Yellow
         $servers = if ($data.allowed_servers) { $data.allowed_servers } else { $data.allowed_ips }
-        foreach ($srv in $servers) {
-            Write-Host "  - $srv" -ForegroundColor White
+        if (-not $servers -or $servers.Count -eq 0) {
+            Write-Host "  (No servers authorized yet)" -ForegroundColor Gray
+        } else {
+            foreach ($srv in $servers) {
+                $label = if ($data.server_labels.PSObject.Properties[$srv]) { $data.server_labels.PSObject.Properties[$srv].Value } else { "Unnamed Server" }
+                $paddedLabel = "[$label]".PadRight(28)
+                Write-Host "  - " -NoNewline -ForegroundColor Gray
+                Write-Host $paddedLabel -NoNewline -ForegroundColor Cyan
+                Write-Host " -> $srv" -ForegroundColor White
+            }
         }
         Write-Host "==============================================" -ForegroundColor Cyan
     }
 
     "add" {
         if (-not $Target) {
-            Write-Host "Usage: .\manage-licenses.ps1 add <IP:Port or IP>" -ForegroundColor Red
+            Write-Host "Usage: .\manage-licenses.ps1 add <IP:Port or IP> [ServerName]" -ForegroundColor Red
             return
         }
         $formatted = Normalize-Address $Target
+        $serverName = if ($Param2) { $Param2.Trim() } else { "Authorized Server" }
         $data = Get-Content $JsonPath -Raw | ConvertFrom-Json
+        Ensure-LabelsObject $data
+
         $servers = [System.Collections.ArrayList]@($data.allowed_servers)
         if ($servers -contains $formatted) {
             Write-Host "[!] Address '$formatted' is already authorized." -ForegroundColor Yellow
@@ -86,19 +105,43 @@ switch ($Action.ToLower()) {
         }
         $servers.Add($formatted) | Out-Null
         $data.allowed_servers = $servers
+        $data.server_labels | Add-Member -MemberType NoteProperty -Name $formatted -Value $serverName -Force
+
         $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
-        Write-Host "[+] Added '$formatted' to authorized servers." -ForegroundColor Green
-        Push-Changes "Authorize GhostTrace server: $formatted"
+        Write-Host "[+] Added '$formatted' [$serverName] to authorized servers." -ForegroundColor Green
+        Push-Changes "Authorize GhostTrace server: $formatted [$serverName]"
+    }
+
+    "edit" {
+        if (-not $Target -or -not $Param2) {
+            Write-Host "Usage: .\manage-licenses.ps1 edit <IP:Port> <NewServerName>" -ForegroundColor Red
+            return
+        }
+        $formatted = Normalize-Address $Target
+        $newName = $Param2.Trim()
+        $data = Get-Content $JsonPath -Raw | ConvertFrom-Json
+        Ensure-LabelsObject $data
+
+        $servers = [System.Collections.ArrayList]@($data.allowed_servers)
+        if (-not ($servers -contains $formatted)) {
+            Write-Host "[!] Address '$formatted' is not in the authorized list." -ForegroundColor Yellow
+            return
+        }
+        $data.server_labels | Add-Member -MemberType NoteProperty -Name $formatted -Value $newName -Force
+        $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
+        Write-Host "[+] Updated label for '$formatted' to '[$newName]'." -ForegroundColor Green
+        Push-Changes "Update GhostTrace label for $formatted to [$newName]"
     }
 
     "rebind" {
-        if (-not $Target -or -not $NewTarget) {
+        if (-not $Target -or -not $Param2) {
             Write-Host "Usage: .\manage-licenses.ps1 rebind <Old_IP:Port> <New_IP:Port>" -ForegroundColor Red
             return
         }
         $oldFormatted = Normalize-Address $Target
-        $newFormatted = Normalize-Address $NewTarget
+        $newFormatted = Normalize-Address $Param2
         $data = Get-Content $JsonPath -Raw | ConvertFrom-Json
+        Ensure-LabelsObject $data
         $servers = [System.Collections.ArrayList]@($data.allowed_servers)
 
         if (-not ($servers -contains $oldFormatted)) {
@@ -106,8 +149,17 @@ switch ($Action.ToLower()) {
             return
         }
         $servers.Remove($oldFormatted)
-        $servers.Add($newFormatted) | Out-Null
+        if (-not ($servers -contains $newFormatted)) {
+            $servers.Add($newFormatted) | Out-Null
+        }
         $data.allowed_servers = $servers
+
+        if ($data.server_labels.PSObject.Properties[$oldFormatted]) {
+            $existingLabel = $data.server_labels.PSObject.Properties[$oldFormatted].Value
+            $data.server_labels.PSObject.Properties.Remove($oldFormatted)
+            $data.server_labels | Add-Member -MemberType NoteProperty -Name $newFormatted -Value $existingLabel -Force
+        }
+
         $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
         Write-Host "[+] Successfully rebound host from '$oldFormatted' to '$newFormatted'!" -ForegroundColor Green
         Push-Changes "Rebind GhostTrace server from $oldFormatted to $newFormatted"
@@ -120,6 +172,7 @@ switch ($Action.ToLower()) {
         }
         $formatted = Normalize-Address $Target
         $data = Get-Content $JsonPath -Raw | ConvertFrom-Json
+        Ensure-LabelsObject $data
         $servers = [System.Collections.ArrayList]@($data.allowed_servers)
         if (-not ($servers -contains $formatted)) {
             Write-Host "[!] Address '$formatted' was not found." -ForegroundColor Yellow
@@ -127,6 +180,11 @@ switch ($Action.ToLower()) {
         }
         $servers.Remove($formatted)
         $data.allowed_servers = $servers
+
+        if ($data.server_labels.PSObject.Properties[$formatted]) {
+            $data.server_labels.PSObject.Properties.Remove($formatted)
+        }
+
         $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
         Write-Host "[-] Removed '$formatted' from authorized servers." -ForegroundColor Yellow
         Push-Changes "Revoke GhostTrace server: $formatted"
@@ -170,10 +228,11 @@ switch ($Action.ToLower()) {
         Write-Host "   Author: Krishna Mittal • All Rights Reserved          " -ForegroundColor Cyan
         Write-Host "==========================================================" -ForegroundColor Cyan
         Write-Host "Commands:"
-        Write-Host "  .\manage-licenses.ps1 list                          - View all authorized server addresses"
-        Write-Host "  .\manage-licenses.ps1 add <IP:Port>                 - Authorize a server (e.g. 62.141.62.25:25597)"
+        Write-Host "  .\manage-licenses.ps1 list                          - View all authorized servers & names"
+        Write-Host "  .\manage-licenses.ps1 add <IP:Port> [ServerName]    - Authorize server with friendly owner name"
+        Write-Host "  .\manage-licenses.ps1 edit <IP:Port> <NewName>      - Change owner/server name"
         Write-Host "  .\manage-licenses.ps1 rebind <OldAddr> <NewAddr>    - Transfer license to customer's new host"
-        Write-Host "  .\manage-licenses.ps1 remove <IP:Port>              - Revoke an unauthorized server"
+        Write-Host "  .\manage-licenses.ps1 remove <IP:Port>              - Revoke server authorization"
         Write-Host "  .\manage-licenses.ps1 public                        - Unlock plugin for EVERYONE (Public Access Mode)"
         Write-Host "  .\manage-licenses.ps1 strict                        - Enforce whitelist (Only authorized IPs can run)"
         Write-Host "  .\manage-licenses.ps1 kill                          - Emergency shutdown of all distributed copies"
