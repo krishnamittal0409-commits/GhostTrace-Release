@@ -18,18 +18,30 @@ $GistDir = "$PSScriptRoot\gist-control"
 $JsonPath = "$GistDir\ghosttrace_licenses.json"
 
 function Ensure-GistRepo {
-    if (-not (Test-Path $JsonPath)) {
+    if (-not (Test-Path "$GistDir\.git")) {
         Write-Host "[!] Cloning Gist repository..." -ForegroundColor Yellow
         git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir
+    } else {
+        Push-Location $GistDir
+        try {
+            git pull --rebase origin main 2>$null
+        } catch {} finally {
+            Pop-Location
+        }
     }
 }
 
 function Push-Changes ($CommitMsg) {
     Push-Location $GistDir
     try {
+        git pull --rebase origin main 2>$null
         git add ghosttrace_licenses.json
         git commit -m $CommitMsg
-        git push origin main
+        $pushOut = git push origin main 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            git pull --rebase origin main
+            git push origin main
+        }
         Write-Host "[+] Successfully synced to Krishna's Cloud Gist!" -ForegroundColor Green
     } catch {
         Write-Host "[-] Git push failed: $_" -ForegroundColor Red

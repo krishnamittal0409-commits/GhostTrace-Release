@@ -5,13 +5,27 @@ $GistDir = "$PSScriptRoot\gist-control"
 $JsonPath = "$GistDir\ghosttrace_licenses.json"
 
 function Ensure-GistRepo {
-    if (-not (Test-Path $JsonPath)) {
+    if (-not (Test-Path "$GistDir\.git")) {
         git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir
+    } else {
+        Push-Location $GistDir
+        try {
+            git pull --rebase origin main 2>$null
+        } catch {} finally {
+            Pop-Location
+        }
     }
 }
 Ensure-GistRepo
 
 function Read-LicenseData {
+    Push-Location $GistDir
+    try {
+        git pull --rebase origin main 2>$null
+    } catch {} finally {
+        Pop-Location
+    }
+
     $raw = Get-Content $JsonPath -Raw | ConvertFrom-Json
     if ($null -eq $raw.server_labels) {
         $raw | Add-Member -MemberType NoteProperty -Name "server_labels" -Value ([PSCustomObject]@{}) -Force
@@ -20,12 +34,19 @@ function Read-LicenseData {
 }
 
 function Save-And-Push ($data, $message) {
-    $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
     Push-Location $GistDir
     try {
+        git pull --rebase origin main 2>$null
+        $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
         git add ghosttrace_licenses.json
         git commit -m $message
-        git push origin main
+        $pushOut = git push origin main 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            git pull --rebase origin main
+            git push origin main
+        }
+    } catch {
+        [System.Windows.Forms.MessageBox]::Show("Failed to sync changes with cloud: $_", "Sync Error", "OK", "Error")
     } finally {
         Pop-Location
     }
@@ -79,6 +100,7 @@ $fontMonoHeader = New-Object System.Drawing.Font("Consolas", 9, [System.Drawing.
 $fontSmall = New-Object System.Drawing.Font("Segoe UI", 8)
 
 # --- Main Window Form ---
+[System.Windows.Forms.Application]::EnableVisualStyles()
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "GhostTrace Cloud License & Access Center - Krishna Mittal"
 $form.Size = New-Object System.Drawing.Size(650, 855)
@@ -86,6 +108,7 @@ $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
 $form.MaximizeBox = $false
 $form.BackColor = $cBg
+$form.TopMost = $true
 
 $icoPath = "$PSScriptRoot\ghosttrace.ico"
 if (Test-Path $icoPath) {
@@ -93,6 +116,12 @@ if (Test-Path $icoPath) {
         $form.Icon = New-Object System.Drawing.Icon($icoPath)
     } catch {}
 }
+
+$form.Add_Shown({
+    $form.Activate()
+    $form.BringToFront()
+    $form.TopMost = $false
+})
 
 # --- Header Panel ---
 $headerPanel = New-Object System.Windows.Forms.Panel
@@ -680,5 +709,9 @@ $btnRefresh.Add_Click({
     $lblStatus.Text = "Synced cleanly with Cloud Gist."
 })
 
-Refresh-UI
-$form.ShowDialog() | Out-Null
+try {
+    Refresh-UI
+    $form.ShowDialog() | Out-Null
+} catch {
+    [System.Windows.Forms.MessageBox]::Show("Error launching GhostTrace License Manager:`n`n$_`n`n$($_.ScriptStackTrace)", "GhostTrace License Manager Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+}
