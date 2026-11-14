@@ -65,6 +65,10 @@ $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
 $form.MaximizeBox = $false
 $form.BackColor = $cBg
+$icoFile = "$PSScriptRoot\ghosttrace.ico"
+if (Test-Path $icoFile) {
+    $form.Icon = New-Object System.Drawing.Icon($icoFile)
+}
 
 # --- Header Panel ---
 $headerPanel = New-Object System.Windows.Forms.Panel
