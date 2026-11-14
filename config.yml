@@ -98,10 +98,11 @@ checks:
 # ================================================================
 replays:
   enabled: true
-  # Ticks of rolling buffer to record before the incident (200 ticks = 10s)
-  pre-record-ticks: 200
-  # Ticks to record after the incident for context (80 ticks = 4s)
-  post-record-ticks: 80
+  # Ticks of rolling buffer to record before the incident (600 ticks = 30s)
+  pre-record-ticks: 600
+  # Ticks to record after the incident for context (300 ticks = 15s)
+  # Total incident recording duration: 45 full seconds
+  post-record-ticks: 300
   # Maximum saved replay files on disk before old ones are purged
   max-saved-replays: 100
 
