@@ -92,6 +92,20 @@ checks:
     check-wallhack: true
 
 # ================================================================
+#                   SERVER-SIDE INCIDENT REPLAYS
+# High-fidelity 3D incident clips saved when a cheat is flagged.
+# Lets the player play on while admins review the full 3D playback.
+# ================================================================
+replays:
+  enabled: true
+  # Ticks of rolling buffer to record before the incident (200 ticks = 10s)
+  pre-record-ticks: 200
+  # Ticks to record after the incident for context (80 ticks = 4s)
+  post-record-ticks: 80
+  # Maximum saved replay files on disk before old ones are purged
+  max-saved-replays: 100
+
+# ================================================================
 #                       BYPASS CONFIGURATION
 # Players or IDs listed here will NOT be tracked, scanned, or logged.
 # ================================================================
