@@ -20,11 +20,11 @@ $JsonPath = "$GistDir\ghosttrace_licenses.json"
 function Ensure-GistRepo {
     if (-not (Test-Path "$GistDir\.git")) {
         Write-Host "[!] Cloning Gist repository..." -ForegroundColor Yellow
-        git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir
+        git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir *>$null
     } else {
         Push-Location $GistDir
         try {
-            git pull --rebase origin main 2>$null
+            git pull --rebase origin main *>$null
         } catch {} finally {
             Pop-Location
         }
@@ -34,13 +34,13 @@ function Ensure-GistRepo {
 function Push-Changes ($CommitMsg) {
     Push-Location $GistDir
     try {
-        git pull --rebase origin main 2>$null
-        git add ghosttrace_licenses.json
-        git commit -m $CommitMsg
+        git pull --rebase origin main *>$null
+        git add ghosttrace_licenses.json *>$null
+        git commit -m $CommitMsg *>$null
         $pushOut = git push origin main 2>&1
         if ($LASTEXITCODE -ne 0) {
-            git pull --rebase origin main
-            git push origin main
+            git pull --rebase origin main *>$null
+            git push origin main *>$null
         }
         Write-Host "[+] Successfully synced to Krishna's Cloud Gist!" -ForegroundColor Green
     } catch {

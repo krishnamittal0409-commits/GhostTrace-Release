@@ -6,11 +6,11 @@ $JsonPath = "$GistDir\ghosttrace_licenses.json"
 
 function Ensure-GistRepo {
     if (-not (Test-Path "$GistDir\.git")) {
-        git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir
+        git clone https://gist.github.com/d1fa6935003ce9f9438c5b4cfd672cdd.git $GistDir *>$null
     } else {
         Push-Location $GistDir
         try {
-            git pull --rebase origin main 2>$null
+            git pull --rebase origin main *>$null
         } catch {} finally {
             Pop-Location
         }
@@ -18,17 +18,38 @@ function Ensure-GistRepo {
 }
 Ensure-GistRepo
 
+function Set-AllowedServers($targetData, $serverList) {
+    $arr = [System.Collections.ArrayList]@($serverList)
+    if ($targetData.PSObject.Properties['allowed_servers']) {
+        $targetData.allowed_servers = $arr
+    } else {
+        $targetData | Add-Member -MemberType NoteProperty -Name 'allowed_servers' -Value $arr -Force
+    }
+}
+
 function Read-LicenseData {
     Push-Location $GistDir
     try {
-        git pull --rebase origin main 2>$null
+        git pull --rebase origin main *>$null
     } catch {} finally {
         Pop-Location
     }
 
     $raw = Get-Content $JsonPath -Raw | ConvertFrom-Json
+    if ($raw -is [array]) {
+        $raw = $raw | Where-Object { $_ -is [PSCustomObject] -and ($_.PSObject.Properties['allowed_servers'] -or $_.PSObject.Properties['allowed_ips']) } | Select-Object -Last 1
+    }
     if ($null -eq $raw.server_labels) {
         $raw | Add-Member -MemberType NoteProperty -Name "server_labels" -Value ([PSCustomObject]@{}) -Force
+    }
+    if ($null -eq $raw.allowed_servers) {
+        if ($null -ne $raw.allowed_ips) {
+            $raw | Add-Member -MemberType NoteProperty -Name "allowed_servers" -Value ([System.Collections.ArrayList]@($raw.allowed_ips)) -Force
+        } else {
+            $raw | Add-Member -MemberType NoteProperty -Name "allowed_servers" -Value (New-Object System.Collections.ArrayList) -Force
+        }
+    } else {
+        $raw.allowed_servers = [System.Collections.ArrayList]@($raw.allowed_servers)
     }
     return $raw
 }
@@ -36,14 +57,14 @@ function Read-LicenseData {
 function Save-And-Push ($data, $message) {
     Push-Location $GistDir
     try {
-        git pull --rebase origin main 2>$null
+        git pull --rebase origin main *>$null
         $data | ConvertTo-Json -Depth 5 | Set-Content $JsonPath -Encoding UTF8
-        git add ghosttrace_licenses.json
-        git commit -m $message
+        git add ghosttrace_licenses.json *>$null
+        git commit -m $message *>$null
         $pushOut = git push origin main 2>&1
         if ($LASTEXITCODE -ne 0) {
-            git pull --rebase origin main
-            git push origin main
+            git pull --rebase origin main *>$null
+            git push origin main *>$null
         }
     } catch {
         [System.Windows.Forms.MessageBox]::Show("Failed to sync changes with cloud: $_", "Sync Error", "OK", "Error")
@@ -566,7 +587,7 @@ $btnAdd.Add_Click({
         if (-not ($servers -contains $newEntry)) {
             $servers.Add($newEntry) | Out-Null
         }
-        $data.allowed_servers = $servers
+        Set-AllowedServers $data $servers
 
         # Update label mapping
         if ($data.server_labels.PSObject.Properties[$oldAddr]) {
@@ -587,7 +608,7 @@ $btnAdd.Add_Click({
             return
         }
         $servers.Add($newEntry) | Out-Null
-        $data.allowed_servers = $servers
+        Set-AllowedServers $data $servers
         $data.server_labels | Add-Member -MemberType NoteProperty -Name $newEntry -Value $serverName -Force
 
         $lblStatus.Text = "Authorizing '$serverName' ($newEntry) in Cloud..."
@@ -642,7 +663,7 @@ $btnRebind.Add_Click({
     if (-not ($servers -contains $newEntry)) {
         $servers.Add($newEntry) | Out-Null
     }
-    $data.allowed_servers = $servers
+    Set-AllowedServers $data $servers
 
     # Transfer label
     $serverName = if ($txtName.Text.Trim()) { $txtName.Text.Trim() } else { $selected.Name }
@@ -673,7 +694,7 @@ $btnRevoke.Add_Click({
     $data = Read-LicenseData
     $servers = [System.Collections.ArrayList]@($data.allowed_servers)
     $servers.Remove($selected.Address)
-    $data.allowed_servers = $servers
+    Set-AllowedServers $data $servers
 
     if ($data.server_labels.PSObject.Properties[$selected.Address]) {
         $data.server_labels.PSObject.Properties.Remove($selected.Address)
